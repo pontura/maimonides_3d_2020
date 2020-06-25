@@ -8,6 +8,7 @@ public class Character : MonoBehaviour
     public float moveSpeed = 10;
     public float jumpForce = 100;
     public Animator anim;
+    public Transform handTransform;
 
     public actionStates actionState;
     public enum actionStates
@@ -15,7 +16,8 @@ public class Character : MonoBehaviour
         IDLE,
         JUMP,
         WALK,
-        RESET_JUMP
+        RESET_JUMP,
+        DEAD
     }
 
     void Update()
@@ -36,6 +38,9 @@ public class Character : MonoBehaviour
             Jump();
         if (Input.GetKeyDown(KeyCode.Z))
             GetComponent<Shooter>().Shoot();
+
+        if (Input.GetKeyDown(KeyCode.A))
+            TryToGrabOrLeft();
     }
     void Rotate(int direction)
     {
@@ -54,23 +59,62 @@ public class Character : MonoBehaviour
     {
         if (actionState != actionStates.JUMP && actionState != actionStates.IDLE)
         {
-            anim.Play("idle");
+            anim.Play("Idle");
             actionState = actionStates.IDLE;
         }
     }
     void Jump()
     {
-        if (actionState != actionStates.JUMP)
+        if (actionState != actionStates.JUMP && actionState != actionStates.DEAD)
         {
             anim.Play("attack");
-            Invoke("ResetJump", 2);
             actionState = actionStates.JUMP;
             GetComponent<Rigidbody>().AddForce(Vector3.up * jumpForce);
-        } 
+        }
     }
     void ResetJump()
     {
         actionState = actionStates.RESET_JUMP;
+        Idle();
     }
-    
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Floor")
+        {
+            if (actionState == actionStates.JUMP)
+                ResetJump();
+        }
+    }
+
+    public GrabbableBox grabbableGameObject;
+    public GrabbableBox objectGrabbed;
+
+    private void OnTriggerEnter(Collider collider)
+    {
+        grabbableGameObject = collider.GetComponent<GrabbableBox>();
+    }
+    private void OnTriggerExit(Collider collider)
+    {
+        grabbableGameObject = null;
+    }
+    void TryToGrabOrLeft()
+    {
+        if (grabbableGameObject != null)
+        {
+            print("Grab: " + grabbableGameObject.name);
+            objectGrabbed = grabbableGameObject;
+            grabbableGameObject.OnGrab();
+            grabbableGameObject.transform.SetParent(handTransform);
+            grabbableGameObject.transform.localPosition = Vector3.zero;
+            grabbableGameObject = null;
+        }
+        else if(objectGrabbed != null)
+        {
+            print("Left: " + objectGrabbed.name);
+            objectGrabbed.OnLeft();
+            objectGrabbed.transform.SetParent(transform.parent);
+            objectGrabbed = null;
+        } else
+            print("no hay nada para agarrar o dejar");
+    }
 }

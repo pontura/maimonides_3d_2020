@@ -67,8 +67,13 @@
     <Compile Include="Assets\Bullet.cs" />
     <Compile Include="Assets\Character.cs" />
     <Compile Include="Assets\Enemy.cs" />
+    <Compile Include="Assets\GrabbableBox.cs" />
+    <Compile Include="Assets\Key.cs" />
+    <Compile Include="Assets\Keys.cs" />
     <Compile Include="Assets\Shooter.cs" />
     <Compile Include="Assets\WalkRandom.cs" />
+    <Compile Include="Assets\Wall.cs" />
+    <Compile Include="Assets\Walls.cs" />
     <None Include="Assets\Catgear Games\Model Pack 1\Kiwi\README.txt" />
     <None Include="Assets\Catgear Games\Model Pack 1\Chili\README.txt" />
     <None Include="Assets\Catgear Games\Model Pack 1\Eggy\README.txt" />
