@@ -42,6 +42,7 @@ public class Character : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.A))
             TryToGrabOrLeft();
     }
+
     void Rotate(int direction)
     {
         transform.Rotate(Vector3.up * direction * (rotationSpeed * Time.deltaTime));
@@ -71,6 +72,12 @@ public class Character : MonoBehaviour
             actionState = actionStates.JUMP;
             GetComponent<Rigidbody>().AddForce(Vector3.up * jumpForce);
         }
+    }
+    public void ExtraJump()
+    {
+        anim.Play("attack");
+        actionState = actionStates.JUMP;
+        
     }
     void ResetJump()
     {

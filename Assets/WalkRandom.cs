@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WalkRandom : MonoBehaviour
 {
-    float moveSpeed = 20;
+    public float moveSpeed = 10;
 
     private void Start()
     {
@@ -18,7 +18,7 @@ public class WalkRandom : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Obstacle")
-            transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y + Random.Range(120, 240), 0);
+            transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y + Random.Range(100, 220), 0);
         //anim.Play("idle");
     }
     private void Update()

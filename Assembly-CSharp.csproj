@@ -63,14 +63,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\AreaAlert.cs" />
+    <Compile Include="Assets\AreaVision.cs" />
     <Compile Include="Assets\Boss.cs" />
     <Compile Include="Assets\Bullet.cs" />
     <Compile Include="Assets\Character.cs" />
     <Compile Include="Assets\Enemy.cs" />
+    <Compile Include="Assets\Follow.cs" />
     <Compile Include="Assets\GrabbableBox.cs" />
     <Compile Include="Assets\Key.cs" />
     <Compile Include="Assets\Keys.cs" />
+    <Compile Include="Assets\Resorte.cs" />
     <Compile Include="Assets\Shooter.cs" />
+    <Compile Include="Assets\Teleport.cs" />
     <Compile Include="Assets\WalkRandom.cs" />
     <Compile Include="Assets\Wall.cs" />
     <Compile Include="Assets\Walls.cs" />

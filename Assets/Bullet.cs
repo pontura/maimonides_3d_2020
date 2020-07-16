@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    float speed = 50;
+    public float speed = 50;
 
     public void OnInit()
     {
-        transform.position += transform.forward * 3;
+        //transform.position += transform.forward * 3;
         Invoke("Reset", 5);
-        GetComponent<Rigidbody>().AddForce(transform.forward * 2000);
+        GetComponent<Rigidbody>().AddForce(transform.forward * (50 * speed));
     }
 
     //void Update()
